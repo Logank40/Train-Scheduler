@@ -4,10 +4,12 @@ var config = {
   authDomain: "train-scheduler-f77d0.firebaseapp.com",
   databaseURL: "https://train-scheduler-f77d0.firebaseio.com",
   projectId: "train-scheduler-f77d0",
-  storageBucket: "",
+  storageBucket: "train-scheduler-f77d0.appspot.com",
   messagingSenderId: "45113655347"
 };
 firebase.initializeApp(config);
+
+var database = firebase.database();
 
 //set up event listerner for form submit to capture employee data
 $('#train-form').on('submit', function(event) {
@@ -24,14 +26,14 @@ $('#train-form').on('submit', function(event) {
     frequency: $('#frequency-input')
     .val()
     .trim(),
-    nextArrival: $('arrival-input')
+    nextArrival: $('#arrival-input')
     .val()
-    trim(),
-    minutesAway: $('minutes-input')
+    .trim(),
+    minutesAway: $('#minutes-input')
     };
 
     //add to firebase
-    database.ref().push(employeeDataInput);
+    database.ref().push(trainDataInput);
 });
 
 //use this event listener to retrieve newy added data that was added with .push() method in firebase
